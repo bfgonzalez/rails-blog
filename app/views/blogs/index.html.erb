@@ -12,6 +12,8 @@
       <td><%= blog.body %></td>
       <td><%= link_to "View", blog_path(blog) %></td>
       <td><%= link_to "Edit", edit_blog_path(blog) %></td>
+      <td><%= link_to "Delete", blog_path(blog), method: :delete, data: { confirm: "Are you sure you want to delete this blog from the database?" } %></td>
+
     </tr>
   <% end%>
 </table>
