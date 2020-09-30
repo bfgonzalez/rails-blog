@@ -1,5 +1,18 @@
-<h1>Homepage for Blogs</h1>
+<h1>Blogs</h1>
 
-<%= @blogs %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+
+  <% @blogs.each do |blog| %>
+    <tr>
+      <td><%= blog.title %></td>
+      <td><%= blog.body %></td>
+      <td><%= link_to "View", blog_path(blog) %></td>
+    </tr>
+  <% end%>
+</table>
 
 <%= link_to "New Blog", new_blog_path %>
