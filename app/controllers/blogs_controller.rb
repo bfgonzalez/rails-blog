@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   # list all blogs
   def index
-    @blogs = Blog.all
+    @blogs = Blog.all.order(:id)
   end
 
   # display blog based on id
@@ -14,6 +14,11 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
 
+  # edit blog
+  def edit
+    @blog = Blog.find(params[:id])
+  end
+
   # add blog to database
   def create
     @blog = Blog.new(params.require(:blog).permit(:title, :text, :body, :text))
@@ -22,6 +27,17 @@ class BlogsController < ApplicationController
       redirect_to @blog, alert: "Blog created successfully"
     else
       redirect_to new_blog_path, alert: "Error creating blog"
+    end
+  end
+
+  # edit existing blog in database
+  def update
+    @blog = Blog.find(params[:id])
+
+    if @blog.update(params.require(:blog).permit(:title, :text, :body, :text))
+      redirect_to @blog
+    else
+      render "Edit"
     end
   end
 end
